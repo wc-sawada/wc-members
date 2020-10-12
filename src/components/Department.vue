@@ -103,7 +103,7 @@
 		</ul>
 	</div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .department__name {
 	margin-top: 30px;
 	display: block;
@@ -114,7 +114,6 @@
 	padding: 25px 0 0 0;
 	display: flex;
 	flex-wrap: wrap;
-
 	&__item {
 		margin: 0 45px 45px 0;
 		width: 200px;
@@ -122,12 +121,10 @@
 		box-shadow: 0 0 8px rgba(0, 0, 0, .16);
 		overflow: hidden;
 		position: relative;
-
 		&:nth-child(4n),
 		&:last-child {
 			margin: 0 0 45px 0;
 		}
-
 		a {
 			color: #333;
 			display: flex;
@@ -142,7 +139,6 @@
 		display: block;
 		color: #333;
 		font-size: 14px;
-
 		&--name {
 			margin-top: 5px;
 			font-weight: bold;
@@ -153,7 +149,6 @@
 		position: relative;
 		order: 0;
 		border-bottom: 1px solid #eee;
-
 		&:after {
 			transition: 0.3s;
 			content: "";
@@ -204,7 +199,5 @@
 		right: 0;
 		z-index: 1;
 	}
-
 }
 </style>
-

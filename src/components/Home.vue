@@ -14,30 +14,57 @@
 		</ul>
 	</div>
 </template>
-<style lang="scss">
-	.department {
-		margin: auto;
-		width: 1000px;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-
-		&__link {
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+<script>
+export default {
+	data: function() {
+		return {
+			departments: [],
+		}
+	},
+	crated() {
+		const apiUrl = "http://localhost:1337/departments/"
+		axios.get(apiUrl)
+		.then(response => {
+			this.departments = response.data
+			console.log(response.data);
+		})
+		.catch(function (error) {
+			console.log(error);
+		})
+	}
+}
+</script>
+<style lang="scss" scoped>
+.department {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	&__link {
+		display: block;
+		width: 470px;
+		text-align: center;
+		&:nth-child(n+3) {
+			margin-top: 20px;
+		}
+		a {
+			padding: 12px;
 			display: block;
-			width: 480px;
-			text-align: center;
-
-			&:nth-child(n+3) {
-				margin-top: 20px;
-			}
-
-			a {
-				padding: 12px;
-				display: block;
-				background-color: #e3e3e3;
-				color: #333;
-				font-weight: bold;
+			border: 2px solid #989898;
+			border-radius: 8px;
+			background-color: #fff;
+			color: #464646;
+			font-weight: bold;
+			&:hover {
+				border: 2px solid #012087;
+				background-color: #012087;
+				color: #fff;
 			}
 		}
 	}
+}
+.v-application a {
+	color: #333;
+}
 </style>

@@ -15,7 +15,7 @@ header {
 }
 .header {
 	padding: 18px 0;
-	width: 1080px;
+	width: 1000px;
 	margin: auto;
 	display:flex;
 	justify-content:space-between;
@@ -37,14 +37,13 @@ header {
 	}
 }
 main {
-	min-width: 1080px;
+	min-width: 1000px;
 	margin: auto;
 }
 .contents {
-	width: 1000px;
+	width: 960px;
 	padding: 60px 0;
 	margin: auto;
-
 	&__title {
 		display: block;
 		font-weight: bold;
@@ -57,13 +56,11 @@ main {
 	font-weight: bold;
 	color: #fff;
 	border-radius: 50px;
-	background: gray;
+	background: #012087;
 	padding: 6px 30px;
-
 	&:hover {
 		opacity: .8;
 	}
-
 	&--search {
 		@extend %button;
 	}
@@ -71,7 +68,6 @@ main {
 .footer {
 	padding: 4px 0;
 	background-color: #012087;
-
 	&__text {
 		display: block;
 		width: 1080px;
@@ -79,4 +75,10 @@ main {
 		text-align: center;
 		color: #fff;
 	}
+}
+.v-enter-active, .v-leave-active {
+	transition: opacity 1s;
+}
+.v-enter, .v-leave-to{
+	opacity: 0;
 }

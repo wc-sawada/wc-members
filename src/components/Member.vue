@@ -1,11 +1,11 @@
 <template>
 	<div class="contents member">
-		<h2 class="contents__title">社員詳細 {{ $route.params.id }}</h2>
+		<h2 class="contents__title">社員詳細 {{ $route.params.id }} さん</h2>
 		<div class="detail">
 			<figure class="detail__image">
 				<img src="../assets/images/member_no_image.jpg" alt="">
 			</figure>
-			<table>
+			<table class="detail__table"> 
 				<tr>
 					<th>部署名</th>
 					<td>システムディビジョン</td>
@@ -48,38 +48,40 @@
 				</tr>
 				<tr>
 					<th>人事部通信</th>
-					<td>http://keikan-tsushin/?vol=61</td>
+					<td><a target="_blank" href="http://keikan-tsushin/?vol=61">http://keikan-tsushin/?vol=61</a></td>
 				</tr>
 			</table>
 		</div>
 		<img src="" alt="">
 	</div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .detail {
+	margin-top: 30px;
 	display: flex;
-
+	justify-content: space-around;
 	&__image {
 		img {
 			display: inline-block;
 			border: 1px solid #e3e3e3;
 		}
 	}
-}
-
-table {
-	width: 640px;
-}
-table th {
-	padding: 8px;
-	border: 1px solid #000;
-	font-weight: bold;
-	text-align: center;
-	background-color: #eee;
-}
-table td {
-	padding: 8px;
-	border: 1px solid #000;
+	&__table {
+		width: 680px;
+		th {
+			padding: 12px;
+			border: 1px solid #dcdcdc;
+			font-weight: bold;
+			text-align: center;
+			background-color: #828282;
+			color: #fff;
+		}
+		td {
+			padding: 12px 1em;
+			border: 1px solid #dcdcdc;
+			border-left: none;
+			background-color: #fff;
+		}
+	}
 }
 </style>
-
