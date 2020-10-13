@@ -1,20 +1,13 @@
 <template>
 	<div class="contents home">
-		<h1 class=""></h1>
+		<h1 class="contents__title">部署一覧</h1>
 		<ul class="department">
-			<li class="department__link"><router-link to="department/1" class="department__button">経営企画ディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">金融サービス準備室</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">インシュアランスディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">リアルサービスディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">CS</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">ライフソリューションディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">ビジネスプランニングディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">システムディビジョン</router-link></li>
-			<li class="department__link"><router-link to="department/1" class="department__button">人事部</router-link></li>
+			<li v-for="department in departments" :key="department.id" class="department__link">
+				<router-link :to="{name: 'department', params: {id: department.id}}" class="department__button">{{department.name}}</router-link>
+			</li>
 		</ul>
 	</div>
 </template>
-<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
 <script>
 export default {
 	data: function() {
@@ -22,12 +15,11 @@ export default {
 			departments: [],
 		}
 	},
-	crated() {
+	created: function(){
 		const apiUrl = "http://localhost:1337/departments/"
-		axios.get(apiUrl)
+		this.axios.get(apiUrl)
 		.then(response => {
 			this.departments = response.data
-			console.log(response.data);
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -38,6 +30,7 @@ export default {
 <style lang="scss" scoped>
 .department {
 	width: 100%;
+	margin-top: 30px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;

@@ -10,7 +10,7 @@ import './assets/sass/default.scss';
 
 Vue.config.productionTip = false
 
-//Vue.use (VueAxios, axios)
+Vue.use (VueAxios, axios)
 
 new Vue({
 	vuetify,

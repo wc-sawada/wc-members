@@ -82,3 +82,6 @@ main {
 .v-enter, .v-leave-to{
 	opacity: 0;
 }
+[v-cloak] {
+	display: none;
+}

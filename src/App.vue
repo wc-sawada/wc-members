@@ -17,8 +17,11 @@
 		<div v-if="modalFlg" class="searchModal">
 			<div class="searchModal__contents">
 				<span @click="clickModalClose()" class="searchModal__close"><img src="./assets/images/close.png" alt="close"></span>
-				<p class="searchModal__text">探したい社員の名前を「漢字」または「ひらがな」で入力してください。</p>
+				<p class="searchModal__text">探したい社員の名前を<br>「漢字」または「ひらがな」または「カタカナ」で入力してください。</p>
 				<input v-model="inputText" class="searchModal__input" type="text">
+				<transition name="fade">
+					<p v-if="errorText" class="searchModal__error">{{errorText}}</p>
+				</transition>
 				<button @click="clickModalSearch()" class="button--search" type="button">検索する</button>
 			</div>
 		</div>
@@ -38,7 +41,8 @@ export default {
 	},
 	data: () => ({
 		modalFlg: false,
-		inputText: ""
+		inputText: "",
+		errorText: "",
 	}),
 	methods: {
 		clickModalOpen() {
@@ -49,9 +53,20 @@ export default {
 			this.$router.push
 		},
 		clickModalSearch() {
-			this.inputText
-			// json syutoku
-			this.$router.push('/member/1', () => {})
+			if (!this.inputText) {
+				this.errorText = "入力してください"
+				return false
+			}
+			if (!this.checkString(this.inputText)) {
+				this.errorText = "「漢字」または「ひらがな」または「カタカナ」で入力してください"
+				return false
+			}
+			this.modalFlg = false
+			this.errorText = ""
+			this.$router.push('/search/' + this.inputText, () => {})
+		},
+		checkString(str) {
+			return ( str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/) )? true : false
 		}
 	},
 };
@@ -92,6 +107,13 @@ export default {
 		margin: auto;
 		display: block;
 		border: 1px solid #ddccdd;
+	}
+	&__error {
+		margin-top: 8px;
+		display: block;
+		text-align: center;
+		font-weight: bold;
+		color: red;
 	}
 	.button--search {
 		width: 200px;

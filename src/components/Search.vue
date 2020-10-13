@@ -1,8 +1,7 @@
 <template>
-	<div class="contents department">
-		<h2 class="contents__title">社員一覧</h2>
-		<h3 class="department__name">部署名：{{this.department}}</h3>
-		<ul class="card">
+	<div class="contents search">
+		<h2 class="contents__title">「{{$route.params.name}}」の検索結果</h2>
+		<ul v-if="members" class="card">
 			<li v-for="member in members" :key="member.id" class="card__item">
 				<router-link :to="`/member/${member.id}`">
 					<div class="card__body">
@@ -21,25 +20,24 @@
 				</router-link>
 			</li>
 		</ul>
+		<p v-else>対象の社員は、いません。</p>
 	</div>
 </template>
 <script>
 export default {
 	data: function() {
 		return {
-			department: "",
-			members: [],
+			members: null,
 		}
 	},
-	created: function(){
-		const apiUrl = "http://localhost:1337"
-		return Promise.all([
-			this.axios.get(apiUrl + "/departments/?department_id=" + this.$route.params.id),
-			this.axios.get(apiUrl + "/members/?department_id=" + this.$route.params.id)
-		])
-		.then(([resDepartments, resMembers]) => {
-			this.department = resDepartments.data[0].name
-			this.members = resMembers.data
+	created: function() {
+		// TODO strapiには部分一致検索(like)ができなさそうなので、やり方工夫しないといけない…
+		const apiUrl = "http://localhost:1337/members/"
+		this.axios.get(apiUrl + "?staff_name=" + this.$route.params.name+ "?staff_name_furigana=" + this.$route.params.name)
+		.then(response => {
+			if (this.members.length !== 0) {
+				this.members = response.data
+			}
 		})
 		.catch(function (error) {
 			console.log(error);
@@ -48,13 +46,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.department__name {
-	margin-top: 30px;
-	display: block;
-	font-weight: bold;
-	font-size: 18px;
-}
 .card {
+	margin-top: 30px;
 	padding: 25px 0 0 0;
 	display: flex;
 	flex-wrap: wrap;

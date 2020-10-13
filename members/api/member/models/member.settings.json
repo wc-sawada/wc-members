@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "members",
+  "info": {
+    "name": "member",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "department_id": {
+      "type": "integer"
+    },
+    "group": {
+      "type": "string"
+    },
+    "team": {
+      "type": "string"
+    },
+    "position": {
+      "type": "string"
+    },
+    "staff_name": {
+      "type": "string"
+    },
+    "staff_name_furigana": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "join_date": {
+      "type": "date"
+    },
+    "url": {
+      "type": "string"
+    },
+    "photo": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "leave_flg": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
